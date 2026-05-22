@@ -19,7 +19,7 @@ from utils.audio_utils import extract_audio, chunk_audio_file
 api_key = st.secrets["OPENAI_API_KEY"]
 
 # App config
-st.set_page_config(page_title="AI Privacy Meeting Assistant", page_icon="🔒", layout="wide")
+st.set_page_config(page_title="Data Privacy Meeting Assistant", page_icon="🔒", layout="wide")
 
 # Initialize Session State
 if 'transcript' not in st.session_state:
@@ -31,7 +31,7 @@ if 'ropa_data' not in st.session_state:
 if 'token_usage' not in st.session_state:
     st.session_state.token_usage = {"mom": None, "ropa": None}
 
-st.title("🔒 AI Privacy Meeting Assistant")
+st.title("🔒 Data Privacy Meeting Assistant")
 st.markdown("Upload meeting recordings to automatically transcribe, generate Minutes of Meeting (MoM), and extract Data Privacy Records (RoPA).")
 
 # Sidebar Configuration
