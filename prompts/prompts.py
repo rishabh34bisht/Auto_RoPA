@@ -74,7 +74,7 @@ Here are the specific definitions and instructions for filling each column:
 9. Categories of Personal Data processed: Types of personal data processed (e.g., General/Financial/Government Identifier).
 10. Source of Collection: Describe where/how data is obtained (e.g., Data Principal, Application, Database).
 11. Applications used for processing of data: List the applications, software, or systems used.
-12. Lawful basis of processing: Indicate the lawful basis from the following list (Consent: freely given consent for their information to be processed, Legitimate use: Processing under voluntary disclosure, government benefits like subsidy, protect sovereignty/security of state, legal obligations, medical emergencies, public health, disaster response, employment).
+12. Lawful basis of processing: Indicate the lawful basis from the following list. You MUST select EXACTLY ONE of the following exact strings and output nothing else: ["Consent", "Legitimate use (voluntary disclosure)", "Legitimate use (government benefits)", "Legitimate use (protect sovereignty/security of state)", "Legitimate use (legal obligations)", "Legitimate use (medical emergencies)", "Legitimate use (public health)", "Legitimate use (disaster response)", "Legitimate use (employment)"]
 13. Joint Fiduciary(s) / Independent Fiduciary: Name of the legal entity. If not mentioned, write "NA".
 14. Joint / Independent Fiduciary(s) Data Protection Officer / Privacy Head: Name and contact details. If not mentioned, write "NA".
 15. Joint Fiduciary / Fiduciary to Fiduciary Agreement in place?: Answer: Yes / No / Not Available.
