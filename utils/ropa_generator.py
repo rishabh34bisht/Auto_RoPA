@@ -3,6 +3,7 @@ import json
 from openai import OpenAI
 from prompts.prompts import ROPA_SYSTEM_PROMPT
 
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 def generate_ropa(client: OpenAI, transcript: str, mode: str, manual_config: dict = None) -> tuple[list, dict]:
     """Generates RoPA data in JSON format."""
     
