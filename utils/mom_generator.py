@@ -1,6 +1,8 @@
 # utils/mom_generator.py
 from openai import OpenAI
 from prompts.prompts import MOM_SYSTEM_PROMPT
+import streamlit as st
+
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 def generate_mom(client: OpenAI, transcript: str) -> tuple[str, dict]:
