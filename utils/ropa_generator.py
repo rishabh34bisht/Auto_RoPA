@@ -1,6 +1,7 @@
 # utils/ropa_generator.py
 import json
 from openai import OpenAI
+import streamlit as st
 from prompts.prompts import ROPA_SYSTEM_PROMPT
 
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
