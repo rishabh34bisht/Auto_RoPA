@@ -112,16 +112,19 @@ if uploaded_file is not None and st.button("🚀 Process Media"):
             st.error(f"Pipeline failed: {str(e)}")
             
         finally:
-            # Cleanup all temporary files, including any generated chunks
+            # Cleanup temp files
+            import shutil
+            
             if os.path.exists(media_path): 
                 os.remove(media_path)
             if is_video and os.path.exists(target_audio_path): 
                 os.remove(target_audio_path)
-            if 'audio_chunks' in locals():
-                for chunk_path in audio_chunks:
-                    # Don't try to delete target_audio_path twice if it wasn't chunked
-                    if chunk_path != target_audio_path and os.path.exists(chunk_path):
-                        os.remove(chunk_path)
+                
+            # Safely delete the directory containing all the audio chunks
+            if 'audio_chunks' in locals() and len(audio_chunks) > 0:
+                chunk_dir = os.path.dirname(audio_chunks[0])
+                if os.path.exists(chunk_dir) and ("tmp" in chunk_dir.lower() or "temp" in chunk_dir.lower()):
+                    shutil.rmtree(chunk_dir, ignore_errors=True)
 
 # --- RESULTS DISPLAY ---
 if st.session_state.transcript:
