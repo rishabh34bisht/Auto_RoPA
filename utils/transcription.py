@@ -1,5 +1,6 @@
 # utils/transcription.py
 from openai import OpenAI
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 def transcribe_audio(client: OpenAI, audio_file_paths: list) -> str:
     """
