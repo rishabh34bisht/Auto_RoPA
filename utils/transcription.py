@@ -18,7 +18,7 @@ def transcribe_audio(client: OpenAI, audio_file_paths: list) -> str:
             prompt = previous_transcript_end[-200:] if previous_transcript_end else ""
             
             response = client.audio.transcriptions.create(
-                model="whisper-1", 
+                model="gpt-4o-mini-transcribe", 
                 file=audio_file,
                 response_format="text",
                 prompt=prompt,
