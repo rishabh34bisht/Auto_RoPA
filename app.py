@@ -14,8 +14,9 @@ from utils.export_utils import create_docx, create_excel
 from utils.audio_utils import extract_audio, chunk_audio_file
 
 # Load Environment Variables
-load_dotenv()
-api_key = os.getenv("OPENAI_API_KEY")
+# load_dotenv()
+# api_key = os.getenv("OPENAI_API_KEY")
+api_key = st.secrets["OPENAI_API_KEY"]
 
 # App config
 st.set_page_config(page_title="AI Privacy Meeting Assistant", page_icon="🔒", layout="wide")
