@@ -155,15 +155,41 @@ if st.session_state.transcript:
     with tab3:
         st.info("You can edit the RoPA table directly in the grid below before exporting to Excel.")
         
-        # Convert to Pandas for editing
-        df = pd.DataFrame(st.session_state.ropa_data)
+        # --- NEW: Isolated Regenerate Button ---
+        if st.button("🔄 Regenerate RoPA with current sidebar settings", type="secondary"):
+            with st.spinner("Regenerating RoPA data..."):
+                try:
+                    # Pass the saved transcript and the CURRENT sidebar settings
+                    ropa, ropa_usage = generate_ropa(client, st.session_state.transcript, ropa_mode, manual_config)
+                    st.session_state.ropa_data = ropa
+                    st.session_state.token_usage['ropa'] = ropa_usage
+                    
+                    # Force Streamlit to immediately refresh the UI with the new data
+                    st.rerun() 
+                    
+                except Exception as e:
+                    st.error(f"Failed to regenerate: {str(e)}")
+        
+        # --- Existing Data Editor Logic ---
+        if st.session_state.ropa_data: # Ensure data exists before creating dataframe
+            df = pd.DataFrame(st.session_state.ropa_data)
+        else:
+            df = pd.DataFrame(columns=[]) # Empty fallback
+            
         edited_df = st.data_editor(df, num_rows="dynamic", use_container_width=True)
         
-        # Update session state with edited data
+        # Update session state with any manual edits the user made
         st.session_state.ropa_data = edited_df.to_dict('records')
         
+        # Export Button
         excel_file = create_excel(st.session_state.ropa_data)
-        st.download_button("⬇️ Download RoPA (Excel)", data=excel_file, file_name="ROPA.xlsx", mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+        st.download_button(
+            "⬇️ Download RoPA (Excel)", 
+            data=excel_file, 
+            file_name="ROPA.xlsx", 
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        )
         
+        # Token Usage
         if st.session_state.token_usage['ropa']:
-            st.caption(f"Tokens used for RoPA extraction: {st.session_state.token_usage['ropa']['total_tokens']}")
+            st.caption(f"Tokens used for latest RoPA extraction: {st.session_state.token_usage['ropa']['total_tokens']}")
